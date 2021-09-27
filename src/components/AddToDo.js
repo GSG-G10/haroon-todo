@@ -1,4 +1,4 @@
-import { Input,Form,Button,Space,message } from 'antd';
+import { Input,Form,Button,Space,message,Modal} from 'antd';
 import { useState } from 'react';
 
 
@@ -16,11 +16,30 @@ const AddToDo = ({ToDoList,setToDoList}) => {
     message.error('Submit failed!');
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
 
 
   return (
-    <Form
+    <>
+
+  <Button type="primary" onClick={showModal}>
+          Open Modal
+        </Button>
+        <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+        <Form
       form={form}
       layout="vertical"
       onFinish={onFinish}
@@ -57,6 +76,16 @@ const AddToDo = ({ToDoList,setToDoList}) => {
         </Space>
       </Form.Item>
     </Form>
+
+        </Modal>
+
+
+
+
+
+
+  
+    </>
   );
 };
 
